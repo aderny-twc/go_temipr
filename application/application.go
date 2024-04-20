@@ -1,4 +1,4 @@
-package app
+package application
 
 import (
 	"context"
@@ -11,11 +11,11 @@ type App struct {
 }
 
 func New() *App {
-	app := &App{
+	application := &App{
 		router: loadRoutes(),
 	}
 
-	return app
+	return application
 }
 
 func (a *App) Start(ctx context.Context) error {

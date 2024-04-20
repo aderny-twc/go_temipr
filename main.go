@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aderny-twc/go_temipr/app"
+	"github.com/aderny-twc/go_temipr/application"
 )
 
 func main() {
-	app := app.New()
+	app := application.New()
 
 	err := app.Start(context.TODO())
 	if err != nil {

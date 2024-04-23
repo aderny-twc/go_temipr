@@ -12,9 +12,10 @@ import (
 func main() {
 	app := application.New()
 
-	signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer cancel()
 
-	err := app.Start(context.TODO())
+	err := app.Start(ctx)
 	if err != nil {
 		fmt.Println("failed to start app:", err)
 	}

@@ -36,6 +36,12 @@ func (a *App) Start(ctx context.Context) error {
 
 	}
 
+	defer func() {
+		if err := a.rdb.Close(); err != nil {
+			fmt.Println("failed to close redis", err)
+		}
+	}()
+
 	fmt.Println("Starting server")
 
 	ch := make(chan error, 1)
@@ -56,6 +62,4 @@ func (a *App) Start(ctx context.Context) error {
 		defer cancel()
 		return server.Shutdown(timeout)
 	}
-
-	return nil
 }

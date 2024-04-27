@@ -19,9 +19,7 @@ func orderIDKey(id uint64) string {
 }
 
 func (r *RedisRepo) Insert(ctx context.Context, order model.Order) error {
-
 	data, err := json.Marshal(order)
-
 	if err != nil {
 		return fmt.Errorf("failed to encode order: %w", err)
 	}
@@ -42,11 +40,10 @@ func (r *RedisRepo) Insert(ctx context.Context, order model.Order) error {
 	}
 
 	if _, err := txn.Exec(ctx); err != nil {
-		return fmt.Errorf("failed to execute transaction: %w", err)
+		return fmt.Errorf("failed to exec: %w", err)
 	}
 
 	return nil
-
 }
 
 var ErrNotExist = errors.New("order does not exist")
